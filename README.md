@@ -21,7 +21,20 @@ Stock base for [RoamJS](https://roamjs.com) Roam Research extensions. **Fork thi
    - Add your logic using `roamjs-components` (e.g. `createHTMLObserver`, `createBlock`, `renderToast`)
    - Return `{ unload }` to clean up on unload
 
-3. **Optional**: Add React components under `src/components/` (see [autocomplete](https://github.com/RoamJS/autocomplete), [giphy](https://github.com/RoamJS/giphy) for examples).
+3. **Update all instances of `{Extension Name}` to the name of the extension.**
+
+### Rules for Agents updating this README.md
+
+- refer to README-TEMPLATE.md for the structure of the README.md
+- This is a marketing document. It is user facing, not developer facing.
+- Do not include reference to Roam Research (eg: This is a Roam Research extension), that is implied.
+- Do not include build instructions (eg: `npm run build:roam`).
+- update `# RoamJS Extension Base` to the name of the extension.
+- update askdeepwiki badge to the name of the extension.
+- update the description to be a < 250 character description of the extension. This should be enticing to new users to install the extension.
+- add a `## Features` section to the README.md with a list of the features of the extension.
+
+3. **Prefer**: Add React components under `src/components/` (see [autocomplete](https://github.com/RoamJS/autocomplete), [giphy](https://github.com/RoamJS/giphy) for examples).
 
 4. **Secrets (for publish)** — in the forked repo, configure:
    - `ROAMJS_RELEASE_TOKEN`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`
