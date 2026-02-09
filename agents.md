@@ -51,3 +51,8 @@ You are creating a Roam Research extension.
 
 - Write unit tests for new functionality
 - Ensure tests are meaningful and maintainable
+
+## Build Artifacts
+
+- `extension.js` in the repository root is a compiled file used for easier access and plugin load/testing.
+- Do not edit `extension.js` directly.
