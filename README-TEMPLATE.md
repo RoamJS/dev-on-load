@@ -6,7 +6,8 @@
 
 **{Extension Description: a < 250 character description of the extension. This should be enticing to new users to install the extension.}**
 
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/RoamJS/{Extension Name})
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/RoamJS/{ExtensionName})
+[![Slack](https://img.shields.io/badge/Slack-%23roam--js-purple)](https://roamresearch.slack.com/archives/C016N2B66JU)
 
 ## Features
 
