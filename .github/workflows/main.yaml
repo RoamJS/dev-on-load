@@ -1,13 +1,6 @@
 name: Publish Extension
 on:
   workflow_dispatch:
-  push:
-    branches: main
-    paths:
-      - "src/**"
-      - "README.md"
-      - "package.json"
-      - ".github/workflows/main.yaml"
 
 env:
   GITHUB_TOKEN: ${{ secrets.ROAMJS_RELEASE_TOKEN }}

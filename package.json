@@ -1,23 +1,29 @@
 {
-  "name": "extension-base",
+  "name": "dev-on-load",
   "version": "1.0.0",
-  "description": "Stock RoamJS Roam Research Extension base — fork this repo to start new extensions.",
+  "description": "Reload developer extensions once after a configurable startup delay.",
   "main": "index.js",
   "scripts": {
-    "postinstall": "patch-package",
     "start": "samepage dev",
-    "prebuild:roam": "npm install",
     "build:roam": "samepage build --dry",
-    "test": "samepage test"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "format:check": "prettier --check src tests e2e README.md CHANGELOG.md package.json .github/workflows"
   },
-  "keywords": ["roam", "roam-research", "roamjs"],
+  "keywords": [
+    "roam",
+    "roam-research",
+    "roamjs"
+  ],
   "license": "MIT",
   "dependencies": {
     "roamjs-components": "^0.86.4"
   },
   "devDependencies": {
     "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.6.11"
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.7"
   },
   "samepage": {
     "extends": "node_modules/roamjs-components/package.json"
