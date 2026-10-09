@@ -114,7 +114,16 @@ export default {
       "250",
       "milliseconds persist after reload",
     );
-    await showToast(page).locator("..").click();
+    await showToast(page)
+      .locator("..")
+      .locator(".bp3-control-indicator")
+      .click();
+    await page.waitForFunction(
+      () =>
+        document.querySelector(
+          '.rm-modal-dialog--settings label.rm-settings-panel__value input[type="checkbox"]',
+        )?.checked === false,
+    );
     assert.equal(await showToast(page).isChecked(), false);
     await beginFreshLoad(page);
     const silent = await waitForReload(page);
