@@ -6,7 +6,7 @@
 
 **Start your development session with freshly loaded extensions. Dev on Load automatically reloads all developer extensions after a delay you choose, with an optional custom notification.**
 
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/RoamJS/reload-developer-extensions)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/RoamJS/dev-on-load)
 [![Slack](https://img.shields.io/badge/Slack-%23roam--js-purple)](https://roamresearch.slack.com/archives/C016N2B66JU)
 
 ## Features
@@ -15,20 +15,3 @@
 - Set the delay in seconds, including decimals such as 2.5.
 - Choose whether to show a toast, its intent, and its message.
 - Prevent repeated automatic reloads when this extension reloads itself.
-
-## Settings
-
-Open **Settings → Roam Depot → Dev on Load**. The developer version may appear with a **(dev)** suffix.
-
-| Setting         | Default                        | Behavior                                                          |
-| --------------- | ------------------------------ | ----------------------------------------------------------------- |
-| Delay (seconds) | 5                              | Seconds after this extension loads; accepts decimals such as 2.5. |
-| Show toast      | On                             | Show a notification when the reload finishes or fails.            |
-| Toast intent    | success                        | Choose none, primary, success, warning, or danger.                |
-| Toast message   | Developer extensions reloaded. | Completion message.                                               |
-
-Automatic reload runs once per page load, including when this extension is first enabled. Reloading developer extensions manually does not restart it after it has run. Disabling the extension cancels a pending reload.
-
-Use a nonnegative number for the delay. Invalid values use the default; very large delays are capped at the browser timer limit (about 24.8 days). An empty toast message uses the default.
-
-The operation uses Roam’s developer extension reload API, so it reloads every registered developer extension. Developer mode and access to the original extension folders are required. If the API is unavailable or rejects the operation, the extension reports the failure in the console and, when enabled, shows a danger toast. It does not automatically retry.
