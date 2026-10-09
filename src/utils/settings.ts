@@ -7,7 +7,7 @@ export const TOAST_INTENTS = [
 ] as const;
 export type ToastIntent = (typeof TOAST_INTENTS)[number];
 export const DEFAULTS = {
-  "delay-seconds": "5",
+  "delay-seconds": "3",
   "show-toast": true,
   "toast-intent": "success",
   "toast-message": "Developer extensions reloaded.",
@@ -41,7 +41,10 @@ export const getConfig = (get: (key: string) => unknown): ReloadConfig => {
   return {
     // Browser timers overflow above this limit and otherwise fire immediately.
     delayMs: Math.min(
-      Math.round(parseDelay(get("delay-seconds"), 5) * 1000),
+      Math.round(
+        parseDelay(get("delay-seconds"), Number(DEFAULTS["delay-seconds"])) *
+          1000,
+      ),
       2_147_483_647,
     ),
     showToast: get("show-toast") !== false,

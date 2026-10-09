@@ -21,6 +21,7 @@ describe("settings", () => {
         },
       });
       expect(stored).toEqual(DEFAULTS);
+      expect(stored["delay-seconds"]).toBe("3");
     },
   );
   it("preserves saved values, including false and zero", async () => {
@@ -43,11 +44,22 @@ describe("settings", () => {
   });
   it("uses safe defaults for missing settings", () => {
     expect(config()).toEqual({
-      delayMs: 5000,
+      delayMs: 3000,
       showToast: true,
       toastIntent: "success",
       toastMessage: DEFAULTS["toast-message"],
     });
+  });
+  it("preserves an existing five-second delay", async () => {
+    const stored: Record<string, unknown> = { "delay-seconds": "5" };
+    await initializeSettings({
+      get: (key) => stored[key],
+      set: async (key, value) => {
+        stored[key] = value;
+      },
+    });
+    expect(stored["delay-seconds"]).toBe("5");
+    expect(config(stored).delayMs).toBe(5000);
   });
   it.each([
     ["2", 2000],
@@ -82,7 +94,7 @@ describe("settings", () => {
     {},
     "9".repeat(400),
   ])("falls back for invalid delay %j", (value) => {
-    expect(config({ "delay-seconds": value }).delayMs).toBe(5000);
+    expect(config({ "delay-seconds": value }).delayMs).toBe(3000);
   });
   it("caps large delays instead of overflowing the browser timer", () => {
     expect(
