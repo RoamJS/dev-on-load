@@ -6,7 +6,7 @@ import {
 } from "../../../.agents/skills/roamjs-load-extension/scripts/load-plugin.mjs";
 
 const tab = (page) =>
-  page.getByRole("tab", { name: /^Reload Developer Extensions(?: \(dev\))?$/ });
+  page.getByRole("tab", { name: /^Dev on Load(?: \(dev\))?$/ });
 const showToast = (page) =>
   page.locator('.rm-modal-dialog--settings input[type="checkbox"]:visible');
 const toast = (page, message) =>
@@ -15,7 +15,7 @@ const beginFreshLoad = async (page) => {
   await page.evaluate(async () => {
     window.__reloadProof.calls = [];
     window.__reloadProof.loads = [];
-    window.__roamjsReloadDeveloperExtensionsSession.attempted = false;
+    window.__roamjsDevOnLoadSession.attempted = false;
     await window.__reloadProof.original();
   });
   await page.waitForFunction(() => window.__reloadProof.loads.length > 0);
@@ -33,7 +33,7 @@ const waitForReload = async (page) => {
 };
 
 export default {
-  runtimeNames: ["reload-developer-extensions"],
+  runtimeNames: ["dev-on-load"],
   async run({ page, outDir }) {
     await tab(page).click();
     assert.equal(
@@ -163,7 +163,7 @@ export default {
     await openRoamDepotSettings({ page, timeout: 30000 });
     const removed = await removeExistingDeveloperExtensions({
       page,
-      registrationName: "reload-developer-extensions-proof",
+      registrationName: "dev-on-load-proof",
       timeout: 30000,
     });
     if (result.developerMode === "enabled") {

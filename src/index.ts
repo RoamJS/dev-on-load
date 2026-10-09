@@ -8,7 +8,7 @@ import {
 } from "~/utils/settings";
 import { scheduleReload, type ReloadSession } from "~/utils/reload";
 
-const SESSION_KEY = "__roamjsReloadDeveloperExtensionsSession";
+const SESSION_KEY = "__roamjsDevOnLoadSession";
 type ReloadWindow = Window & { [SESSION_KEY]?: ReloadSession };
 type DepotAPI = { reloadDeveloperExtensions?: () => Promise<unknown> };
 
@@ -16,7 +16,7 @@ export default runExtension(async ({ extensionAPI }) => {
   await initializeSettings(extensionAPI.settings);
 
   extensionAPI.settings.panel.create({
-    tabTitle: "Reload Developer Extensions",
+    tabTitle: "Dev on Load",
     settings: [
       {
         id: "delay-seconds",
@@ -75,13 +75,13 @@ export default runExtension(async ({ extensionAPI }) => {
     },
     notify: ({ message, intent }): void => {
       renderToast({
-        id: "reload-developer-extensions-result",
+        id: "dev-on-load-result",
         content: message,
         intent,
       });
     },
     reportError: (error): void => {
-      console.error("Reload Developer Extensions: reload failed", error);
+      console.error("Dev on Load: reload failed", error);
     },
   });
 

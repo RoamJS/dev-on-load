@@ -1,5 +1,5 @@
 {
-  "name": "reload-developer-extensions",
+  "name": "dev-on-load",
   "version": "1.0.0",
   "description": "Reload developer extensions once after a configurable startup delay.",
   "main": "index.js",

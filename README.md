@@ -1,10 +1,10 @@
-# Reload Developer Extensions
+# Dev on Load
 
 <a href="https://roamjs.com/">
     <img src="https://avatars.githubusercontent.com/u/138642184" alt="RoamJS Logo" title="RoamJS" align="right" height="60" />
 </a>
 
-**Start your development session with freshly loaded extensions. Reload Developer Extensions automatically reloads all developer extensions after a delay you choose, with an optional custom notification.**
+**Start your development session with freshly loaded extensions. Dev on Load automatically reloads all developer extensions after a delay you choose, with an optional custom notification.**
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/RoamJS/reload-developer-extensions)
 [![Slack](https://img.shields.io/badge/Slack-%23roam--js-purple)](https://roamresearch.slack.com/archives/C016N2B66JU)
@@ -18,7 +18,7 @@
 
 ## Settings
 
-Open **Settings → Roam Depot → Reload Developer Extensions**. The developer version may appear with a **(dev)** suffix.
+Open **Settings → Roam Depot → Dev on Load**. The developer version may appear with a **(dev)** suffix.
 
 | Setting              | Default                        | Behavior                                                      |
 | -------------------- | ------------------------------ | ------------------------------------------------------------- |

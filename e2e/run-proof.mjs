@@ -11,15 +11,15 @@ const outArg = process.argv.indexOf("--out");
 const outDir = path.resolve(
   outArg >= 0 ? process.argv[outArg + 1] : "local/roam-proof",
 );
-const proofDir = path.join(outDir, "reload-developer-extensions-proof");
+const proofDir = path.join(outDir, "dev-on-load-proof");
 await fs.cp(path.resolve("dist"), proofDir, { recursive: true });
 const result = await runExtensionTest({
   repo: proofDir,
   out: outDir,
-  registrationName: "reload-developer-extensions-proof",
+  registrationName: "dev-on-load-proof",
   envPath: process.env.ROAM_PLAYWRIGHT_ENV_PATH,
   playwrightPackageRoot: process.env.PLAYWRIGHT_PACKAGE_ROOT,
-  runtimeNames: ["reload-developer-extensions"],
+  runtimeNames: ["dev-on-load"],
   testModule: path.resolve("e2e/roam-proof.mjs"),
   sessionFactory: async (options) => {
     const environment = await resolveRoamEnvironment({
@@ -50,12 +50,9 @@ const result = await runExtensionTest({
         throw new Error("Live Roam reload API unavailable");
       const original = depot.reloadDeveloperExtensions.bind(depot);
       window.__reloadProof = { calls: [], loads: [], original };
-      document.body.addEventListener(
-        "roamjs:reload-developer-extensions:loaded",
-        () => {
-          window.__reloadProof.loads.push(performance.now());
-        },
-      );
+      document.body.addEventListener("roamjs:dev-on-load:loaded", () => {
+        window.__reloadProof.loads.push(performance.now());
+      });
       depot.reloadDeveloperExtensions = async () => {
         const call = { started: performance.now() };
         window.__reloadProof.calls.push(call);
