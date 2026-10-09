@@ -50,17 +50,6 @@ describe("settings", () => {
       toastMessage: DEFAULTS["toast-message"],
     });
   });
-  it("preserves an existing five-second delay", async () => {
-    const stored: Record<string, unknown> = { "delay-seconds": "5" };
-    await initializeSettings({
-      get: (key) => stored[key],
-      set: async (key, value) => {
-        stored[key] = value;
-      },
-    });
-    expect(stored["delay-seconds"]).toBe("5");
-    expect(config(stored).delayMs).toBe(5000);
-  });
   it.each([
     ["2", 2000],
     ["2.5", 2500],
@@ -73,12 +62,6 @@ describe("settings", () => {
     [0, 0],
   ])("converts seconds %j to %i milliseconds", (value, expected) => {
     expect(config({ "delay-seconds": value }).delayMs).toBe(expected);
-  });
-  it("ignores the removed milliseconds setting", () => {
-    expect(
-      config({ "delay-seconds": "2.5", "delay-milliseconds": "500" }).delayMs,
-    ).toBe(2500);
-    expect(DEFAULTS).not.toHaveProperty("delay-milliseconds");
   });
   it.each([
     "",

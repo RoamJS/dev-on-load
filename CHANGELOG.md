@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Reduce the default startup delay from five seconds to three seconds. Saved delays are preserved.
+- Reduce the default startup delay from five seconds to three seconds.
 
 ## [1.0.0] - 2026-10-09
 
