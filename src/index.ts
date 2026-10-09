@@ -21,16 +21,8 @@ export default runExtension(async ({ extensionAPI }) => {
       {
         id: "delay-seconds",
         name: "Delay (seconds)",
-        description:
-          "Whole seconds to wait after this extension loads. Added to milliseconds. Changes apply on the next page load.",
+        description: "Seconds to wait after this extension loads.",
         action: { type: "input", placeholder: "5" },
-      },
-      {
-        id: "delay-milliseconds",
-        name: "Delay (milliseconds)",
-        description:
-          "Additional whole milliseconds to wait. For example, 2 seconds + 500 milliseconds = 2.5 seconds. Invalid or negative values use the default.",
-        action: { type: "input", placeholder: "0" },
       },
       {
         id: "show-toast",

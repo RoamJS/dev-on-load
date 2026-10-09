@@ -9,6 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Dev on Load** - Reload developer extensions once after a configurable delay in seconds and milliseconds.
+- **Dev on Load** - Reload developer extensions once after a configurable delay in seconds, including decimal values.
 - **Custom notification** - Choose whether to show a completion toast, its intent, and its message in the settings panel.
 - **Reload loop protection** - Avoid repeated reloads when this extension reloads itself, and cancel pending work when disabled.

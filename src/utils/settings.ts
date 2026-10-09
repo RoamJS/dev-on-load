@@ -8,7 +8,6 @@ export const TOAST_INTENTS = [
 export type ToastIntent = (typeof TOAST_INTENTS)[number];
 export const DEFAULTS = {
   "delay-seconds": "5",
-  "delay-milliseconds": "0",
   "show-toast": true,
   "toast-intent": "success",
   "toast-message": "Developer extensions reloaded.",
@@ -32,9 +31,9 @@ export const initializeSettings = async (settings: {
 const parseDelay = (value: unknown, fallback: number): number => {
   if (typeof value !== "string" && typeof value !== "number") return fallback;
   const text = String(value).trim();
-  if (!/^\d+$/.test(text)) return fallback;
+  if (!/^(?:\d+(?:\.\d*)?|\.\d+)$/.test(text)) return fallback;
   const number = Number(text);
-  return Number.isSafeInteger(number) ? number : fallback;
+  return Number.isFinite(number) ? number : fallback;
 };
 export const getConfig = (get: (key: string) => unknown): ReloadConfig => {
   const intent = get("toast-intent");
@@ -42,8 +41,7 @@ export const getConfig = (get: (key: string) => unknown): ReloadConfig => {
   return {
     // Browser timers overflow above this limit and otherwise fire immediately.
     delayMs: Math.min(
-      parseDelay(get("delay-seconds"), 5) * 1000 +
-        parseDelay(get("delay-milliseconds"), 0),
+      Math.round(parseDelay(get("delay-seconds"), 5) * 1000),
       2_147_483_647,
     ),
     showToast: get("show-toast") !== false,

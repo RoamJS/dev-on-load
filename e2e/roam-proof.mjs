@@ -41,8 +41,8 @@ export default {
       "5",
     );
     assert.equal(
-      await page.getByPlaceholder("0", { exact: true }).inputValue(),
-      "0",
+      await page.getByText("Delay (milliseconds)", { exact: true }).count(),
+      0,
     );
     assert.equal(
       await page
@@ -74,8 +74,7 @@ export default {
     );
 
     await tab(page).click();
-    await page.getByPlaceholder("5", { exact: true }).fill("1");
-    await page.getByPlaceholder("0", { exact: true }).fill("250");
+    await page.getByPlaceholder("5", { exact: true }).fill("1.25");
     await page
       .getByPlaceholder("Developer extensions reloaded.", { exact: true })
       .fill("Custom developer reload complete");
@@ -106,13 +105,8 @@ export default {
     await tab(page).click();
     assert.equal(
       await page.getByPlaceholder("5", { exact: true }).inputValue(),
-      "1",
+      "1.25",
       "seconds persist after reload",
-    );
-    assert.equal(
-      await page.getByPlaceholder("0", { exact: true }).inputValue(),
-      "250",
-      "milliseconds persist after reload",
     );
     await showToast(page)
       .locator("..")
@@ -144,7 +138,7 @@ export default {
       customDelayMs: elapsedMs,
       silent,
       checks: [
-        "five native settings and defaults",
+        "four native settings and defaults",
         "real API reload",
         "default success toast",
         "no recursive reload",

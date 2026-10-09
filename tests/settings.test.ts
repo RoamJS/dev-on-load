@@ -49,34 +49,45 @@ describe("settings", () => {
       toastMessage: DEFAULTS["toast-message"],
     });
   });
-  it("adds whole seconds and milliseconds, including zero", () => {
+  it.each([
+    ["2", 2000],
+    ["2.5", 2500],
+    ["1.25", 1250],
+    [".25", 250],
+    [" 2.5 ", 2500],
+    ["0.005", 5],
+    ["1.2345", 1235],
+    [2.5, 2500],
+    [0, 0],
+  ])("converts seconds %j to %i milliseconds", (value, expected) => {
+    expect(config({ "delay-seconds": value }).delayMs).toBe(expected);
+  });
+  it("ignores the removed milliseconds setting", () => {
     expect(
-      config({ "delay-seconds": "2", "delay-milliseconds": "500" }).delayMs,
+      config({ "delay-seconds": "2.5", "delay-milliseconds": "500" }).delayMs,
     ).toBe(2500);
-    expect(
-      config({ "delay-seconds": 0, "delay-milliseconds": 0 }).delayMs,
-    ).toBe(0);
+    expect(DEFAULTS).not.toHaveProperty("delay-milliseconds");
   });
   it.each([
     "",
     "-1",
-    "1.5",
+    "-0.5",
+    "1.2.3",
+    "0x10",
+    "1e3",
     "Infinity",
     "oops",
     null,
     true,
     {},
-    "9007199254740992",
+    "9".repeat(400),
   ])("falls back for invalid delay %j", (value) => {
-    expect(
-      config({ "delay-seconds": value, "delay-milliseconds": value }).delayMs,
-    ).toBe(5000);
+    expect(config({ "delay-seconds": value }).delayMs).toBe(5000);
   });
   it("caps large delays instead of overflowing the browser timer", () => {
     expect(
       config({
         "delay-seconds": "999999999",
-        "delay-milliseconds": "999999999",
       }).delayMs,
     ).toBe(2147483647);
   });
