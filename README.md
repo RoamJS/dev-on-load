@@ -1,50 +1,35 @@
-# RoamJS Extension Base
+# Reload Developer Extensions
 
-Stock base for [RoamJS](https://roamjs.com) Roam Research extensions. **Fork this repo** to start a new extension.
+<a href="https://roamjs.com/">
+    <img src="https://avatars.githubusercontent.com/u/138642184" alt="RoamJS Logo" title="RoamJS" align="right" height="60" />
+</a>
 
-## What's included
+**Start your development session with freshly loaded extensions. Reload Developer Extensions automatically reloads all developer extensions after a delay you choose, with an optional custom notification.**
 
-- **roamjs-components** — shared utilities, DOM helpers, queries, writes, and UI components
-- **Samepage build** — `samepage build` produces the Roam Depot–ready bundle
-- **Settings panel** — example `extensionAPI.settings.panel.create` with an Enable switch
-- **TypeScript** — tsconfig extending `@samepage/scripts`
-- **CI** — GitHub Actions to build on push/PR (uses RoamJS secrets for publish)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/RoamJS/reload-developer-extensions)
+[![Slack](https://img.shields.io/badge/Slack-%23roam--js-purple)](https://roamresearch.slack.com/archives/C016N2B66JU)
 
-## After forking
+## Features
 
-1. **Rename the repo** and update `package.json`:
-   - `name`: your extension slug (e.g. `my-extension`)
-   - `description`: one line describing the extension
+- Automatically reload all developer extensions once after this extension loads.
+- Set the delay in whole seconds and additional milliseconds.
+- Choose whether to show a toast, its intent, and its message.
+- Prevent repeated automatic reloads when this extension reloads itself.
 
-2. **Implement in `src/index.ts`**:
-   - Keep or replace the settings panel
-   - Add your logic using `roamjs-components` (e.g. `createHTMLObserver`, `createBlock`, `renderToast`)
-   - Return `{ unload }` to clean up on unload
+## Settings
 
-3. **Update all instances of `{Extension Name}` to the name of the extension.**
+Open **Settings → Roam Depot → Reload Developer Extensions**. The developer version may appear with a **(dev)** suffix.
 
-### Rules for Agents updating this README.md
+| Setting              | Default                        | Behavior                                                      |
+| -------------------- | ------------------------------ | ------------------------------------------------------------- |
+| Delay (seconds)      | 5                              | Whole seconds after this extension loads.                     |
+| Delay (milliseconds) | 0                              | Added to seconds: 2 seconds + 500 milliseconds = 2.5 seconds. |
+| Show toast           | On                             | Show a notification when the reload finishes or fails.        |
+| Toast intent         | success                        | Choose none, primary, success, warning, or danger.            |
+| Toast message        | Developer extensions reloaded. | Completion message.                                           |
 
-- refer to README-TEMPLATE.md for the structure of the README.md
-- This is a marketing document. It is user facing, not developer facing.
-- Do not include reference to Roam Research (eg: This is a Roam Research extension), that is implied.
-- Do not include build instructions (eg: `npm run build:roam`).
-- update `# RoamJS Extension Base` to the name of the extension.
-- update askdeepwiki badge to the name of the extension.
-- update the description to be a < 250 character description of the extension. This should be enticing to new users to install the extension.
-- add a `## Features` section to the README.md with a list of the features of the extension.
+Settings changes apply on the next full page load. Automatic reload runs once per page load, including when this extension is first enabled. Reloading developer extensions manually does not restart it after it has run. Disabling the extension cancels a pending reload.
 
-3. **Prefer**: Add React components under `src/components/` (see [autocomplete](https://github.com/RoamJS/autocomplete), [giphy](https://github.com/RoamJS/giphy) for examples).
+Use nonnegative whole numbers for both delay fields. Invalid values use the defaults; very large delays are capped at the browser timer limit (about 24.8 days). An empty toast message uses the default.
 
-4. **Secrets (for publish)** — in the forked repo, configure:
-   - `ROAMJS_RELEASE_TOKEN`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`
-   - `AWS_REGION`, `ROAMJS_PROXY` (vars)
-
-## Scripts
-
-- `npm start` — samepage dev (local development)
-- `npm run build:roam` — build for Roam (dry run; CI runs `npx samepage build`)
-
-## License
-
-MIT
+The operation uses Roam’s developer extension reload API, so it reloads every registered developer extension. Developer mode and access to the original extension folders are required. If the API is unavailable or rejects the operation, the extension reports the failure in the console and, when enabled, shows a danger toast. It does not automatically retry.

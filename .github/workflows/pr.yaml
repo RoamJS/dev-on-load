@@ -1,17 +1,22 @@
-name: Publish Extension
+name: Validate extension
 on: pull_request
-
-env:
-  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  AWS_REGION: ${{ vars.AWS_REGION }}
-
+permissions:
+  contents: read
 jobs:
-  deploy:
+  validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: install
-        run: npm install
-      - name: build
-        run: npx samepage build
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run typecheck
+      - run: npm run format:check
+      - run: npm run build:roam
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reload-developer-extensions
+          path: dist/
