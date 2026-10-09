@@ -21,6 +21,7 @@ describe("settings", () => {
         },
       });
       expect(stored).toEqual(DEFAULTS);
+      expect(stored["delay-seconds"]).toBe("3");
     },
   );
   it("preserves saved values, including false and zero", async () => {
@@ -43,7 +44,7 @@ describe("settings", () => {
   });
   it("uses safe defaults for missing settings", () => {
     expect(config()).toEqual({
-      delayMs: 5000,
+      delayMs: 3000,
       showToast: true,
       toastIntent: "success",
       toastMessage: DEFAULTS["toast-message"],
@@ -62,12 +63,6 @@ describe("settings", () => {
   ])("converts seconds %j to %i milliseconds", (value, expected) => {
     expect(config({ "delay-seconds": value }).delayMs).toBe(expected);
   });
-  it("ignores the removed milliseconds setting", () => {
-    expect(
-      config({ "delay-seconds": "2.5", "delay-milliseconds": "500" }).delayMs,
-    ).toBe(2500);
-    expect(DEFAULTS).not.toHaveProperty("delay-milliseconds");
-  });
   it.each([
     "",
     "-1",
@@ -82,7 +77,7 @@ describe("settings", () => {
     {},
     "9".repeat(400),
   ])("falls back for invalid delay %j", (value) => {
-    expect(config({ "delay-seconds": value }).delayMs).toBe(5000);
+    expect(config({ "delay-seconds": value }).delayMs).toBe(3000);
   });
   it("caps large delays instead of overflowing the browser timer", () => {
     expect(

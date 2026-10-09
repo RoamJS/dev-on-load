@@ -22,7 +22,7 @@ export default runExtension(async ({ extensionAPI }) => {
         id: "delay-seconds",
         name: "Delay (seconds)",
         description: "Seconds to wait after this extension loads.",
-        action: { type: "input", placeholder: "5" },
+        action: { type: "input", placeholder: DEFAULTS["delay-seconds"] },
       },
       {
         id: "show-toast",

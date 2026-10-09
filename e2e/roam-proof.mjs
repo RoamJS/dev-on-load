@@ -37,8 +37,8 @@ export default {
   async run({ page, outDir }) {
     await tab(page).click();
     assert.equal(
-      await page.getByPlaceholder("5", { exact: true }).inputValue(),
-      "5",
+      await page.getByPlaceholder("3", { exact: true }).inputValue(),
+      "3",
     );
     assert.equal(
       await page.getByText("Delay (milliseconds)", { exact: true }).count(),
@@ -57,8 +57,8 @@ export default {
     const defaults = await waitForReload(page);
     assert.equal(defaults.calls.length, 1);
     assert(
-      defaults.calls[0].started - defaults.loads[0] >= 4900,
-      "default waits five seconds",
+      defaults.calls[0].started - defaults.loads[0] >= 2900,
+      "default waits three seconds",
     );
     const defaultToast = toast(page, "Developer extensions reloaded.");
     await defaultToast.waitFor();
@@ -74,7 +74,7 @@ export default {
     );
 
     await tab(page).click();
-    await page.getByPlaceholder("5", { exact: true }).fill("1.25");
+    await page.getByPlaceholder("3", { exact: true }).fill("1.25");
     await page
       .getByPlaceholder("Developer extensions reloaded.", { exact: true })
       .fill("Custom developer reload complete");
@@ -104,7 +104,7 @@ export default {
 
     await tab(page).click();
     assert.equal(
-      await page.getByPlaceholder("5", { exact: true }).inputValue(),
+      await page.getByPlaceholder("3", { exact: true }).inputValue(),
       "1.25",
       "seconds persist after reload",
     );
