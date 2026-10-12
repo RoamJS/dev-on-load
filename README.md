@@ -1,17 +1,11 @@
 # Dev on Load
 
-<a href="https://roamjs.com/">
-    <img src="https://avatars.githubusercontent.com/u/138642184" alt="RoamJS Logo" title="RoamJS" align="right" height="60" />
-</a>
+**Retired on October 12, 2026.** Roam Research plans to implement automatic loading of developer extensions natively, including the desktop application's main-process changes. Dev on Load has been withdrawn and this repository is archived for reference.
 
-**Start your development session with freshly loaded extensions. Dev on Load automatically reloads all developer extensions after a delay you choose, with an optional custom notification.**
+See [Roam Research's response](https://github.com/Roam-Research/roam-depot/pull/1477#issuecomment-6132839423). The [Roam Depot submission](https://github.com/Roam-Research/roam-depot/pull/1477) was closed without merging; Dev on Load was never published through Roam Depot.
 
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/RoamJS/dev-on-load)
-[![Slack](https://img.shields.io/badge/Slack-%23roam--js-purple)](https://roamresearch.slack.com/archives/C016N2B66JU)
+Roam's response describes planned work, not a confirmed release. This extension will receive no further development or releases. If you installed a local development copy, remove its Dev on Load entry from Roam Depot's developer extensions and remove the local folder.
 
-## Features
+## Historical behavior
 
-- Automatically reload all developer extensions once after this extension loads.
-- Set the delay in seconds, including decimals such as 2.5.
-- Choose whether to show a toast, its intent, and its message.
-- Prevent repeated automatic reloads when this extension reloads itself.
+Dev on Load reloaded developer extensions once after a configurable startup delay, with an optional notification and protection against repeated automatic reloads. The source and tests remain available as historical reference under the existing MIT license.
